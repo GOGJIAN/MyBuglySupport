@@ -125,6 +125,7 @@ class JJBugReport private constructor() {
                         .kv("exception",crash.exception)
                         .kv("stack",crash.stack)
                         .kv("activitys", crash.activitys)
+                        .kv("urls",crash.urls)
                         .kv("fragments",crash.fragments)
                         .kv("clicks",crash.clicks)
                         .build())
