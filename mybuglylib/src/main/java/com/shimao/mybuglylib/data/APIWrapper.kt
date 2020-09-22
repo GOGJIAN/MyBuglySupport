@@ -5,6 +5,7 @@ import android.util.Log
 import com.shimao.mybuglylib.core.JJBugReport
 import okhttp3.*
 import java.io.IOException
+import java.lang.Exception
 
 
 /**
@@ -17,18 +18,19 @@ class APIWrapper {
         fun postReport(url: String,map: MutableMap<String,String>, callback: ICallBack<*>?){
             val client = HttpClient.getHttpClient(true)
             val call = client.newCall(createOkHttpRequest(url, map))
-            call.enqueue(object :Callback{
-                override fun onFailure(call: Call, e: IOException) {
-                    callback?.onError(e.message?:"")
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    val code = response.code()
-                    if(code == 200){
+            var response:Response? = null
+            Thread {
+                try {
+                    response = call.execute()
+                    if (response!!.isSuccessful){
                         callback?.onNext(null)
                     }
+                }catch (e: Exception){
+                    callback?.onError(e.toString())
+                }finally {
+                    response?.close()
                 }
-            })
+            }.start()
         }
 
         private fun createOkHttpRequest(
