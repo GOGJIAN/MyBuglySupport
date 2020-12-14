@@ -19,18 +19,22 @@ class APIWrapper {
             val client = HttpClient.getHttpClient(true)
             val call = client.newCall(createOkHttpRequest(url, map))
             var response:Response? = null
-            Thread {
-                try {
-                    response = call.execute()
-                    if (response!!.isSuccessful){
-                        callback?.onNext(null)
+            try {
+                Thread {
+                    try {
+                        response = call.execute()
+                        if (response!!.isSuccessful){
+                            callback?.onNext(null)
+                        }
+                    }catch (e: Exception){
+                        callback?.onError(e.toString())
+                    }finally {
+                        response?.close()
                     }
-                }catch (e: Exception){
-                    callback?.onError(e.toString())
-                }finally {
-                    response?.close()
-                }
-            }.start()
+                }.start()
+            }catch (e:Exception){
+
+            }
         }
 
         private fun createOkHttpRequest(
