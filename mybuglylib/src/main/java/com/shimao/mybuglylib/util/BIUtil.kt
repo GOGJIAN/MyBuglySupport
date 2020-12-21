@@ -1,5 +1,6 @@
 package com.shimao.mybuglylib.util
 
+import com.google.gson.Gson
 import com.shimao.mybuglylib.core.JJBugReport
 import com.shimao.mybuglylib.data.APIWrapper
 import com.shimao.mybuglylib.data.ICallBack
@@ -56,18 +57,19 @@ class BIUtil {
         }
 
         fun build():String{
-            val builder = StringBuilder()
-            builder.append("{")
-            if(params.isNotEmpty()){
-                for(entry in params.entries) {
-                    builder.append("\"").append(entry.key).append("\"")
-                    builder.append(":").append("\"").append(entry.value).append("\"")
-                    builder.append(",")
-                }
-                builder.deleteCharAt(builder.lastIndex)
-            }
-            builder.append("}")
-            return builder.toString()
+            return Gson().toJson(params)
+//            val builder = StringBuilder()
+//            builder.append("{")
+//            if(params.isNotEmpty()){
+//                for(entry in params.entries) {
+//                    builder.append("\"").append(entry.key).append("\"")
+//                    builder.append(":").append("\"").append(entry.value).append("\"")
+//                    builder.append(",")
+//                }
+//                builder.deleteCharAt(builder.lastIndex)
+//            }
+//            builder.append("}")
+//            return builder.toString()
         }
 
 

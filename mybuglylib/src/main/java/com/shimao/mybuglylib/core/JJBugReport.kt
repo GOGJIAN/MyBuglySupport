@@ -79,19 +79,19 @@ class JJBugReport private constructor() {
     }
 
     fun getActivityString():String{
-        return Gson().toJson(sActivityList)
+        return Gson().toJson(sActivityList.toTypedArray())
     }
 
     fun getFragmentString():String{
-        return Gson().toJson(sFragmentList)
+        return Gson().toJson(sFragmentList.toTypedArray())
     }
 
     fun getClickString():String{
-        return Gson().toJson(sClickList)
+        return Gson().toJson(sClickList.toTypedArray())
     }
 
     fun getUrlString():String{
-        return Gson().toJson(sUrlList)
+        return Gson().toJson(sUrlList.toTypedArray())
     }
 
     fun init(context: Context?){
