@@ -65,17 +65,17 @@ class JJBugHandler private constructor(defHandler: Thread.UncaughtExceptionHandl
                     doAfterPost(t,error)
                 }
             })
-        val time = System.currentTimeMillis()
-        while (System.currentTimeMillis() - time < JJBugReport.getInstance().sDelay){
-
-        }
-        doAfterPost(t,error)
-//        Timer().schedule(object :TimerTask(){
-//            override fun run() {
-//                Log.d("TAGTAG","timer")
-//                doAfterPost(t,error)
-//            }
-//        },JJBugReport.getInstance().sDelay)
+//        val time = System.currentTimeMillis()
+//        while (System.currentTimeMillis() - time < JJBugReport.getInstance().sDelay){
+//
+//        }
+//        doAfterPost(t,error)
+        Timer().schedule(object :TimerTask(){
+            override fun run() {
+                Log.d("TAGTAG","timer")
+                doAfterPost(t,error)
+            }
+        },JJBugReport.getInstance().sDelay)
 
     }
 
