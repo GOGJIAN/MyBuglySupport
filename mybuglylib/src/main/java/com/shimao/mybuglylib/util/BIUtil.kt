@@ -39,7 +39,7 @@ class BIUtil {
         fun exception(t:Throwable):String {
             val list = mutableListOf<String>()
             for (stack in t.stackTrace){
-                list.add("\"$stack\"")
+                list.add("$stack")
             }
             return list.toString()
         }
