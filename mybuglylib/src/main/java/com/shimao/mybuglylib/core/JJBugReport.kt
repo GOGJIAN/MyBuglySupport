@@ -78,6 +78,22 @@ class JJBugReport private constructor() {
         sClickList.add(clickEvent)
     }
 
+    fun getActivitys():Array<ActivityEvent>{
+        return sActivityList.toTypedArray()
+    }
+
+    fun getFragments(): Array<FragmentEvent> {
+        return sFragmentList.toTypedArray()
+    }
+
+    fun getClicks(): Array<ClickEvent> {
+        return sClickList.toTypedArray()
+    }
+
+    fun getUrls(): Array<String> {
+        return sUrlList.toTypedArray()
+    }
+
     fun getActivityString():String{
         return Gson().toJson(sActivityList.toTypedArray())
     }
@@ -123,12 +139,12 @@ class JJBugReport private constructor() {
                         BIUtil.CtxBuilder()
                         .kv("message",crash.message)
                         .kv("exception",crash.exception)
-                        .kv("stack",crash.stack)
-                        .kv("activitys", crash.activitys)
-                        .kv("urls",crash.urls)
-                        .kv("fragments",crash.fragments)
-                        .kv("clicks",crash.clicks)
-                        .build())
+                            .kv("stack",Gson().fromJson(crash.stack,List::class.java))
+                            .kv("activitys", Gson().fromJson(crash.activitys,List::class.java))
+                            .kv("urls",Gson().fromJson(crash.urls,List::class.java))
+                            .kv("fragments",Gson().fromJson(crash.fragments,List::class.java))
+                            .kv("clicks",Gson().fromJson(crash.clicks,List::class.java))
+                            .build())
                     .execute(object : ICallBack.CallBackImpl<Any>(){
                         override fun onNext(data: Any?) {
                             Log.d("TAGTAG","next")

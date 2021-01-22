@@ -11,7 +11,7 @@ import android.content.Context
  * @date   : 2020/7/21 18:06
  * @version: 1.0
  */
-@Database(entities = [CrashVO::class],version = 2)
+@Database(entities = [CrashVO::class],version = 4)
 abstract class CrashDatabase: RoomDatabase() {
     abstract fun crashDao(): CrashDao
 

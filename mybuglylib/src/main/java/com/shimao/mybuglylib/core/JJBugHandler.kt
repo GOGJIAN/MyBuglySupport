@@ -47,11 +47,11 @@ class JJBugHandler private constructor(defHandler: Thread.UncaughtExceptionHandl
             .setCtx(BIUtil.CtxBuilder()
                 .kv("message",error.message)
                 .kv("exception",error::class.java.name)
-                .kv("stack",stack)
-                .kv("activitys", activitys)
-                .kv("fragments",fragments)
-                .kv("clicks",clicks)
-                .kv("urls",urls)
+                .kv("stack",BIUtil.exceptionList(error))
+                .kv("activitys", JJBugReport.getInstance().getActivitys())
+                .kv("fragments",JJBugReport.getInstance().getFragments())
+                .kv("clicks",JJBugReport.getInstance().getClicks())
+                .kv("urls",JJBugReport.getInstance().getUrls())
                 .build())
             .execute(object :ICallBack.CallBackImpl<Any>(){
                 override fun onNext(data: Any?) {

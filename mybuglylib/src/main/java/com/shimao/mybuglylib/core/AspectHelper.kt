@@ -48,11 +48,11 @@ class AspectHelper {
 //    }
 
     private val fragmentList = mutableListOf("onResume","onPause","onHiddenChanged")
-    @Before("execution(* androidx.fragment.app.Fragment.on**(..))")
+    @Before("execution(* android.support.v4.app.Fragment.on**(..))")
     fun onFragmentRecord(joinPoint: JoinPoint){
         val key = joinPoint.signature.toString()
         val clazz = joinPoint.getThis()::class.java.name
-        if(!(clazz.startsWith(JJBugReport.getInstance().sSonPacketName)&&key.contains("androidx.fragment.app.Fragment"))){
+        if(!(clazz.startsWith(JJBugReport.getInstance().sSonPacketName)&&key.contains("android.support.v4.app.Fragment"))){
             return
         }
         var count = 0

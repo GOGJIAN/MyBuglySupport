@@ -37,19 +37,28 @@ class BIUtil {
          * @throws IOException
          */
         fun exception(t:Throwable):String {
+            return Gson().toJson(exceptionList(t))
+//            val list = mutableListOf<String>()
+//            for (stack in t.stackTrace){
+//                list.add("$stack")
+//            }
+//            return list.toString()
+        }
+
+        fun exceptionList(t:Throwable):List<String> {
             val list = mutableListOf<String>()
             for (stack in t.stackTrace){
                 list.add("$stack")
             }
-            return list.toString()
+            return list
         }
     }
 
 
     class CtxBuilder{
-        private val params:MutableMap<String,String?> by lazy { LinkedHashMap<String,String?>()}
+        private val params:MutableMap<String,Any?> by lazy { LinkedHashMap<String,Any?>()}
 
-        fun kv(key:String,value:String?):CtxBuilder{
+        fun kv(key:String,value:Any?):CtxBuilder{
             if (key.isNotEmpty()){
                 params[key] = value
             }
