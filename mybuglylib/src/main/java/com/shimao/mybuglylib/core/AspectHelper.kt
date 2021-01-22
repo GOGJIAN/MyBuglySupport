@@ -71,7 +71,7 @@ class AspectHelper {
 
         val fragment = joinPoint.getThis() as Fragment
         val index = try {
-            fragment.parentFragment!!.fragmentManager!!.fragments.indexOf(fragment)
+            fragment.fragmentManager!!.fragments.indexOf(fragment)
         }catch (e:Exception){
             -1
         }
@@ -91,7 +91,7 @@ class AspectHelper {
         }
         val fragment = joinPoint.getThis() as Fragment
         val index = try {
-            fragment.parentFragment!!.fragmentManager!!.fragments.indexOf(fragment)
+            fragment.fragmentManager!!.fragments.indexOf(fragment)
         }catch (e:Exception){
             -1
         }
