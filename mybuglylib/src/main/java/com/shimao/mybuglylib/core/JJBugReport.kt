@@ -56,7 +56,7 @@ class JJBugReport private constructor() {
     var mainActivity:String? = null
         private set
 
-    var sSonPacketName:String = "com.shimao"
+    var sSonPacketName:String = "com.meilishuo"
         private set
 
     private var sCallback: JJBugCallBack? = null

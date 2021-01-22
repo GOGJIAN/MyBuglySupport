@@ -82,11 +82,11 @@ class AspectHelper {
         )
     }
 
-    @Before("execution(* androidx.fragment.app.Fragment.setUserVisibleHint(..))")
+    @Before("execution(* android.support.v4.app.Fragment.setUserVisibleHint(..))")
     fun onFragmentShow(joinPoint: JoinPoint){
         val key = joinPoint.signature.toString()
         val clazz = joinPoint.getThis()::class.java.name
-        if(!(clazz.startsWith(JJBugReport.getInstance().sSonPacketName)&&key.contains("androidx.fragment.app.Fragment"))){
+        if(!(clazz.startsWith(JJBugReport.getInstance().sSonPacketName)&&key.contains("android.support.v4.app.Fragment"))){
             return
         }
         val fragment = joinPoint.getThis() as Fragment
