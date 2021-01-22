@@ -29,6 +29,7 @@ class JJBugHandler private constructor(defHandler: Thread.UncaughtExceptionHandl
         val clicks = JJBugReport.getInstance().getClickString()
         val urls = JJBugReport.getInstance().getUrlString()
         val id = UUID.randomUUID().toString()
+        val time = System.currentTimeMillis()
         CrashDatabase.get().crashDao().insert(
             CrashVO(
                 id = id,
@@ -39,7 +40,7 @@ class JJBugHandler private constructor(defHandler: Thread.UncaughtExceptionHandl
                 fragments = fragments,
                 clicks = clicks,
                 urls = urls,
-                ctime = System.currentTimeMillis(),
+                ctime = time,
                 status = 0
             ))
         BIUtil()
@@ -52,6 +53,7 @@ class JJBugHandler private constructor(defHandler: Thread.UncaughtExceptionHandl
                 .kv("fragments",JJBugReport.getInstance().getFragments())
                 .kv("clicks",JJBugReport.getInstance().getClicks())
                 .kv("urls",JJBugReport.getInstance().getUrls())
+                .kv("crash_time",time)
                 .build())
             .execute(object :ICallBack.CallBackImpl<Any>(){
                 override fun onNext(data: Any?) {

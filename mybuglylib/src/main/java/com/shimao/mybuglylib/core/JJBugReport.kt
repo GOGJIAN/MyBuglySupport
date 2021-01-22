@@ -144,6 +144,7 @@ class JJBugReport private constructor() {
                             .kv("urls",Gson().fromJson(crash.urls,List::class.java))
                             .kv("fragments",Gson().fromJson(crash.fragments,List::class.java))
                             .kv("clicks",Gson().fromJson(crash.clicks,List::class.java))
+                            .kv("crash_time",crash.ctime)
                             .build())
                     .execute(object : ICallBack.CallBackImpl<Any>(){
                         override fun onNext(data: Any?) {
